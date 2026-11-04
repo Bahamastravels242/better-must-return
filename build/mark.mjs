@@ -77,7 +77,7 @@ export function mark(html){
  const stage=(cls,icon,n,title,tag,body)=>`<article class="pstage ${cls}"><div class="phead">${ic(icon,'big')}<span class="pnum">Stage ${n}</span><h3>${title}</h3></div><div class="pbody"><b>${tag}</b><p>${body}</p></div></article>`;
  const pipe=`
     <div class="pipe" id="pipeline">
-      <div class="subhead"><span class="eyebrow">From ideas to a national development plan</span><h3 class="pipe-title">The Innovation-to-Action Pipeline</h3></div>
+      <div class="subhead"><span class="eyebrow">From ideas to a national development plan</span><h3 class="pipe-title">The Innovation-to-Action Pipeline</h3><p class="pipe-sub">A three-stage process that gives every member a way to help build the Party’s plan for the country, from first idea to adopted policy.</p></div>
       <div class="pstages">
         ${stage('s1','bulb',1,'Policy Labs','Build and develop the ideas.','The Policy Labs are where the building happens. Members begin with the Party’s national development vision, choose areas matching their interests, knowledge or expertise, and work with others to turn that vision into things that could actually be done. That can include policy proposals, community projects, economic concepts, technological solutions, prototypes, cultural initiatives and other practical solutions.')}
         <span class="parrow" aria-hidden="true"></span>
@@ -151,6 +151,7 @@ export function mark(html){
 .subhead+.pillars,.subhead+.shift{margin-top:16px}
 /* pipeline */
 .pipe{margin-top:56px}
+.pipe-sub{color:var(--muted);font-size:1.05rem;max-width:62ch;margin-top:6px}
 .pipe-title{font-family:var(--display);font-size:clamp(1.8rem,3.6vw,2.6rem);font-weight:900;text-transform:uppercase;line-height:1}
 .pstages{margin-top:20px;display:grid;grid-template-columns:1fr 34px 1fr 34px 1fr;align-items:stretch}
 .pstage{border-radius:20px;overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:0 18px 40px -26px rgba(20,20,60,.45);display:flex;flex-direction:column}
