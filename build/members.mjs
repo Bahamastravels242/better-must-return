@@ -7,11 +7,11 @@ export function members(html){
  if(!html.includes('/media/downloads/og-members.jpg'))throw new Error('MEMBERS PATCH: og image');
  must('<meta property="og:title" content="We Need Better. Better Must Return.">','<meta property="og:title" content="We Need Better. Members First.">');
  must('<meta property="og:description" content="Mark A. Humes for FNM Chairman: a modern FNM, built to build the next Bahamas. The plan, the record and the first 100 days.">',
-      '<meta property="og:description" content="Members First: our reform agenda for a greater voice for every member. Mark A. Humes for FNM Chairman.">');
+      '<meta property="og:description" content="Ours is a campaign against the status quo and the habits that cost us two straight elections. Reform is in the FNM’s DNA. Be a part of the Members First movement.">');
  must('<meta name="description" content="Mark A. Humes for FNM Chairman: a modern FNM built to build the next Bahamas.">',
-      '<meta name="description" content="Members First: our reform agenda for a greater voice for every member. Mark A. Humes for FNM Chairman.">');
+      '<meta name="description" content="Ours is a campaign against the status quo and the habits that cost us two straight elections. Reform is in the FNM’s DNA. Be a part of the Members First movement.">');
  must('const msg="We need better, and better must return. See the plan of Mark Humes for FNM Chairman: a modern FNM and the next Bahamas: "+url;',
-      'const msg="We need better. Members First: a greater voice for every member. See the reform agenda of Mark Humes for FNM Chairman: "+url;');
+      'const msg="We need better. Ours is a campaign against the status quo and the habits that cost us two straight elections. Reform is in the FNM’s DNA. Be a part of the Members First movement. "+url;');
 
  // brand and nav
  must('<span><b>BETTER MUST RETURN</b><small>Mark A. Humes for Chairman</small></span>','<span><b>MEMBERS FIRST</b><small>Mark A. Humes for Chairman</small></span>');
@@ -22,6 +22,10 @@ export function members(html){
       '<h1><span class="lead">We need better.</span><span>Members</span><span>First</span></h1>');
  must('<p class="sub">A modern FNM, built to build the next Bahamas. This is the plan, the record, and the first hundred days.</p>',
       '<p class="sub voice">A greater voice for every member.</p>');
+
+ // Chapter 1 preamble, after the opening paragraph
+ must('Breaking the cycle means changing the conditions that have allowed this culture to take root, survive and repeat itself.</p>',
+      'Breaking the cycle means changing the conditions that have allowed this culture to take root, survive and repeat itself.</p>\n      <p class="lede lede2">The Members First movement is a movement against this status quo, against the habits and practices that produced two straight defeats, and against the way the party has been run during these election cycles, not against the people who run it. The founders walked out over how dissent was treated; they wouldn’t tolerate it, and neither should we. Reform is in our DNA, and we invite you to be a part of this movement.</p>');
 
  // the reform agenda section, after Culture and before Modern FNM
  const items=[
@@ -63,6 +67,7 @@ export function members(html){
 
  const css=`
 /* MEMBERS FIRST */
+#cycle .chapter-head .lede2{margin-top:6px;color:var(--ink);font-weight:500}
 .hero h1 .lead{font-size:.34em;line-height:1;color:#FFD9D9;font-weight:800;margin-bottom:.22em;letter-spacing:.02em}
 .hero .sub.voice{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(1.5rem,3vw,2.2rem);line-height:1.05;color:#FFE08A;max-width:none;margin-top:18px}
 .alist{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;counter-reset:a}
