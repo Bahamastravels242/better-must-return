@@ -63,10 +63,31 @@ export function members(html){
  // footer
  must('<span>Mark A. Humes for FNM Chairman. A campaign platform for the FNM Convention.','<span>Mark A. Humes for FNM Chairman. Members First · Our Reform Agenda. A campaign platform for the FNM Convention.');
 
+ // ---- Nov 12 content edits ----
+ // Builder: remove the three house boxes
+ {const a=html.indexOf('<div class="house">');const b=html.indexOf('<div class="team">',a);
+  if(a<0||b<0)throw new Error('MEMBERS PATCH: house boxes');html=html.slice(0,a)+html.slice(b);}
+ // 100 days heading
+ must('<h2>The first <em>100</em> days</h2>','<h2>Our promise: the first <em>100</em> days</h2>');
+ // Bridge: explain the party-to-nation link
+ {const h=html.indexOf('<h2>Build the party right. Build the country right.</h2>');const t=html.indexOf('<div class="talk">',h);
+  if(h<0||t<0)throw new Error('MEMBERS PATCH: bridge');
+  html=html.slice(0,t)+'<p class="lede bridge-lede">The party is the vehicle that carries a vision into government, and what a party practices inside is what it will practice in office. A party that cannot give its members ownership will not give Bahamians ownership, or a party that cannot modernise itself will not modernise the nation. That is why the same six ideas will shape the modern FNM as much as they will shape our plan for the country.</p>\n    '+html.slice(t);}
+ // Next Bahamas: move and rewrite the intro to sit after the characters, above the blocks
+ must(`<p class="lede">You don't start building until you know what you're building. So we show you the finished picture first, then build it, piece by piece, in order, over five years.</p>`,'');
+ must('<div class="scrolly act2" data-scrolly="act2">',`<p class="lede bahamas-lede">You can't start building a nation until you know what nation you're building. Right now, we have all the pieces but no picture. Our plan is to create the finished picture first, then build it piece by piece, in order, over five years, starting today.</p>\n    <div class="scrolly act2" data-scrolly="act2">`);
+ must(`<span class="tag">Where we are</span><h3>Pieces without a picture</h3><p>Clinics, schools, power, internet, housing, tourism, fisheries. Each one built on its own, each one patched, none of them adding up.</p><p>We've been building without knowing what we're building.</p>`,
+      `<span class="tag">The Bahamian predicament</span><h3>Pieces without a picture</h3><p>We've spent decades building without knowing exactly what we're building. Clinics, schools, power, internet, housing, tourism, fisheries, white papers, blue papers, bills and regulations. Each one built on its own, each one patched, none of them adding up. Now we change that.</p>`);
+ must('<span class="tag">The vision</span><h3>An Eco-Cosmopolitan Bahamas</h3>','<span class="tag">What we’re building: the vision</span><h3>An Eco-Cosmopolitan Bahamas</h3>');
+ must('<span class="tag">The foundation</span><h3>Health. Education. Energy.</h3>','<span class="tag">Where do we start: the foundation</span><h3>Health. Education. Energy.</h3>');
+ must('<span class="tag">Back to today</span><h3>Now we build</h3>','<span class="tag">Where we are</span><h3>The Bahamas today</h3>');
+
  if(/better must return/i.test(html.replace(/<script[\s\S]*?<\/script>/g,'')))throw new Error('MEMBERS PATCH: slogan still present');
 
  const css=`
 /* MEMBERS FIRST */
+.bridge-lede{margin:26px 0 8px;max-width:72ch}
+.bahamas-lede{margin:34px 0 0;max-width:72ch}
 #cycle .chapter-head .lede2{margin-top:6px}
 .hero h1 .lead{font-size:.34em;line-height:1;color:#FFD9D9;font-weight:800;margin-bottom:.22em;letter-spacing:.02em}
 .hero .sub.voice{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(1.5rem,3vw,2.2rem);line-height:1.05;color:#FFE08A;max-width:none;margin-top:18px}
