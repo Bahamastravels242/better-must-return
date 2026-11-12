@@ -3,6 +3,8 @@ export function members(html){
  const must=(a,b)=>{if(!html.includes(a))throw new Error('MEMBERS PATCH MISSING: '+a.slice(0,70));html=html.replace(a,b)};
 
  // share previews
+ html=html.replace(/(property="og:image" content="[^"]*)\/media\/og-hero\.jpg"/,'$1/media/downloads/og-members.jpg"');
+ if(!html.includes('/media/downloads/og-members.jpg'))throw new Error('MEMBERS PATCH: og image');
  must('<meta property="og:title" content="We Need Better. Better Must Return.">','<meta property="og:title" content="We Need Better. Members First.">');
  must('<meta property="og:description" content="Mark A. Humes for FNM Chairman: a modern FNM, built to build the next Bahamas. The plan, the record and the first 100 days.">',
       '<meta property="og:description" content="Members First: our reform agenda for a greater voice for every member. Mark A. Humes for FNM Chairman.">');
