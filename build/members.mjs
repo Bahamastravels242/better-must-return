@@ -67,7 +67,7 @@ export function members(html){
 
  const css=`
 /* MEMBERS FIRST */
-#cycle .chapter-head .lede2{margin-top:6px;color:var(--ink);font-weight:500}
+#cycle .chapter-head .lede2{margin-top:6px}
 .hero h1 .lead{font-size:.34em;line-height:1;color:#FFD9D9;font-weight:800;margin-bottom:.22em;letter-spacing:.02em}
 .hero .sub.voice{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(1.5rem,3vw,2.2rem);line-height:1.05;color:#FFE08A;max-width:none;margin-top:18px}
 .alist{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;counter-reset:a}
