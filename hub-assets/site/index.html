@@ -170,7 +170,7 @@ h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.95;text-wrap:ba
         <p class="welcome" id="welcome"></p>
         <h1>The plan, <em>start to finish.</em></h1>
       </div>
-      <p>Read them in order. Each platform opens in a new window, and this page stays here for you.</p>
+      <p>Read them in order. Each platform opens in a new window, and this page stays here for you. When you close this window, you will be asked to sign in again.</p>
     </div>
     <div class="path" aria-hidden="true"><span><b>01</b> Organize</span><i>&rarr;</i><span><b>02</b> Equip</span><i>&rarr;</i><span><b>03</b> Develop</span><i>&rarr;</i><span><b>04</b> Envision</span><i>&rarr;</i><span><b>05</b> Invest</span><i>&rarr;</i><span><b>06</b> Lead</span></div>
     <div class="grid" id="grid"></div>
@@ -188,8 +188,9 @@ h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.95;text-wrap:ba
   var gate=document.getElementById('gate'),hub=document.getElementById('hub'),grid=document.getElementById('grid');
   var form=document.getElementById('form'),err=document.getElementById('err'),go=document.getElementById('go');
   function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
-  function load(){try{return JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){return null}}
-  function save(v){try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){}}
+  try{localStorage.removeItem('mh-plan-hub');localStorage.removeItem('mh-plan-hub-v2')}catch(e){}
+  function load(){try{return JSON.parse(sessionStorage.getItem(KEY)||'null')}catch(e){return null}}
+  function save(v){try{sessionStorage.setItem(KEY,JSON.stringify(v))}catch(e){}}
   function show(data){
     var first=(data.name||'').split(' ')[0];
     document.getElementById('welcome').textContent=first?('Welcome, '+first+'.'):'Welcome.';
@@ -198,7 +199,8 @@ h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.95;text-wrap:ba
       var size=p.size||'half',wide=size==='wide';
       var safe=/^(https:\/\/|\/[a-z])/.test(p.url)?p.url:'#';
       var chap=CH[i]?'<div class="chap"><b>'+CH[i][0]+'</b> '+CH[i][1]+'</div>':'';
-      return chap+'<a class="portal '+size+'" href="'+esc(safe)+'" target="_blank" rel="noopener">'+
+      var inside=safe.charAt(0)==='/';
+      return chap+'<a class="portal '+size+'" href="'+esc(safe)+'"'+(inside?'':' target="_blank" rel="noopener"')+'>'+
         '<img src="'+esc(p.img)+'" alt="" loading="'+(i<2?'eager':'lazy')+'">'+
         '<span class="verb">'+esc(p.verb)+'</span><span class="num" aria-hidden="true">'+esc(p.n)+'</span>'+
         '<span class="body"><h3>'+esc(p.title)+'</h3><p>'+esc(p.text)+'</p><span class="open">Open platform <span aria-hidden="true">&rarr;</span></span></span></a>';
@@ -219,7 +221,7 @@ h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.95;text-wrap:ba
       .catch(function(){err.textContent='No connection. Please check your internet and try again.';})
       .then(function(){go.disabled=false;go.textContent='Open the plan';});
   });
-  document.getElementById('signout').addEventListener('click',function(){try{localStorage.removeItem(KEY)}catch(e){}location.reload();});
+  document.getElementById('signout').addEventListener('click',function(){try{sessionStorage.removeItem(KEY)}catch(e){}location.reload();});
 })();
 </script>
 </body>
