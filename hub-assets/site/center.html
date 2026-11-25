@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FNM Center for Leadership and Learning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<script>try{if(!localStorage.getItem('mh-plan-hub-v2'))location.replace('/');}catch(e){}</script>
+<style>
+:root{
+  /* Layout idea: the same flip viewer as the investor booklet, set on the hub's navy field, holding the eight designed pages of the proposal. */
+  --navy:#0b1d3a;--navy-2:#13284a;--red:#d22b3c;--red-2:#ff5a68;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;--body:"Source Sans 3","Segoe UI",Helvetica,Arial,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:radial-gradient(1100px 600px at 85% -10%,#1d3c72 0%,rgba(29,60,114,0) 60%),linear-gradient(180deg,#0b1d3a,#08152b);color:#e9edf4;font-family:var(--body);display:flex;flex-direction:column;overflow:hidden}
+button,a{font:inherit;color:inherit}
+:focus-visible{outline:3px solid #ffb4bd;outline-offset:2px}
+.bar{display:flex;align-items:center;gap:14px;padding:12px 18px;border-bottom:1px solid rgba(255,255,255,.08);flex:0 0 auto}
+.back{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:#c9d3e3;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:6px 14px}
+.back:hover{background:var(--navy-2);color:#fff}
+.title{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.title b{color:var(--red-2)}
+.spacer{flex:1}
+.stagewrap{flex:1;position:relative;display:flex;min-height:0;padding:16px;overflow:auto}
+.sizer{position:relative;margin:auto;flex:0 0 auto}
+.book{position:absolute;left:0;top:0;width:1200px;height:800px;transform-origin:0 0;perspective:2600px}
+.book.single{width:600px}
+.slot{position:absolute;top:0;width:600px;height:800px;overflow:hidden;background:#fff}
+.slot.l{left:0}.slot.r{left:600px}
+.book.single .slot.l{display:none}.book.single .slot.r{left:0}
+.slot:empty{display:none}
+.book:not(.single) .slot.l .page::after,.book:not(.single) .slot.r .page::after{content:"";position:absolute;top:0;bottom:0;width:40px;pointer-events:none}
+.book:not(.single) .slot.l .page::after{right:0;background:linear-gradient(90deg,rgba(0,0,0,0),rgba(0,0,0,.22))}
+.book:not(.single) .slot.r .page::after{left:0;background:linear-gradient(270deg,rgba(0,0,0,0),rgba(0,0,0,.18))}
+.leaf{position:absolute;top:0;width:600px;height:800px;transform-style:preserve-3d;transition:transform .75s cubic-bezier(.45,.05,.25,1);z-index:5}
+.leaf .face{position:absolute;inset:0;backface-visibility:hidden;overflow:hidden;background:#fff}
+.leaf .back{transform:rotateY(180deg)}
+.book.single .fade{animation:fade .35s ease}
+@keyframes fade{from{opacity:.2;transform:translateX(12px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.leaf{transition:none}.book.single .fade{animation:none}}
+.shadow{position:absolute;top:0;height:800px;box-shadow:0 30px 70px rgba(0,0,0,.5);pointer-events:none}
+.page{position:relative;width:600px;height:800px}
+.page img{display:block;width:100%;height:100%}
+.hot{position:absolute;display:block;border-radius:4px;cursor:pointer}
+.hot:hover{background:rgba(255,255,255,.12);box-shadow:0 0 0 2px rgba(210,43,60,.6)}
+.nav{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;padding:8px 16px 14px;flex:0 0 auto}
+.nav button{background:var(--navy-2);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:8px 18px;font-size:15px;cursor:pointer}
+.nav button:hover{background:#1c3966}
+.nav button:disabled{opacity:.35;cursor:default}
+.count{font-size:14px;color:#b9c3d4;min-width:130px;text-align:center;font-variant-numeric:tabular-nums}
+.zoom{display:flex;align-items:center;gap:6px}
+.zoom button{padding:6px 12px;min-width:40px}
+.pct{font-size:13px;color:#b9c3d4;min-width:44px;text-align:center;font-variant-numeric:tabular-nums}
+@media (max-width:600px){.title{font-size:15px}.back span{display:none}}
+</style>
+</head>
+<body>
+<header class="bar">
+  <a class="back" href="/">&larr; <span>The plan</span></a>
+  <div class="title"><b>FNM</b> Center for Leadership &amp; Learning</div>
+  <div class="spacer"></div>
+</header>
+<main class="stagewrap" id="wrap">
+  <div class="sizer" id="sizer"><div class="book" id="book" aria-live="polite">
+    <div class="shadow" id="shadow"></div>
+    <div class="slot l" id="slotL"></div>
+    <div class="slot r" id="slotR"></div>
+  </div></div>
+</main>
+<nav class="nav">
+  <button id="prev" type="button" aria-label="Previous page">&larr; Back</button>
+  <span class="count" id="count"></span>
+  <button id="next" type="button" aria-label="Next page">Next &rarr;</button>
+  <div class="zoom" role="group" aria-label="Zoom">
+    <button id="zout" type="button" aria-label="Zoom out">&minus;</button>
+    <span class="pct" id="zpct">100%</span>
+    <button id="zin" type="button" aria-label="Zoom in">+</button>
+  </div>
+</nav>
+<script>
+(function(){
+  var N=8;
+  var ALT=['Cover: FNM Center for Leadership and Learning, a concept design proposal','How the Center works, and its four divisions','How people enter and progress','Division 01: Leadership and Personal Development','Division 02: Constitutional Governance and Party Operations','Division 03: Innovation-to-Action Pipeline Labs','Division 04: Community Leadership and Personal Development','Back cover'];
+  var HOT={2:[[6.67,75,42.59,6.39,4,'Go to Division 01'],[50.74,75,42.59,6.39,5,'Go to Division 02'],[6.67,82.5,42.59,6.39,6,'Go to Division 03'],[50.74,82.5,42.59,6.39,7,'Go to Division 04']],
+           4:[[69.63,93.5,23.7,2.2,2,'Back to the four divisions']],5:[[69.63,93.5,23.7,2.2,2,'Back to the four divisions']],6:[[69.63,93.5,23.7,2.2,2,'Back to the four divisions']],7:[[69.63,93.5,23.7,2.2,2,'Back to the four divisions']]};
+  function make(i){if(i<0||i>=N)return null;var p=document.createElement('div');p.className='page';
+    var im=document.createElement('img');im.src='cll/p'+(i+1)+'.jpg';im.alt=ALT[i];im.draggable=false;p.appendChild(im);
+    (HOT[i+1]||[]).forEach(function(h){var a=document.createElement('a');a.className='hot';a.href='#';a.setAttribute('aria-label',h[5]);a.style.cssText='left:'+h[0]+'%;top:'+h[1]+'%;width:'+h[2]+'%;height:'+h[3]+'%';a.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();toPage(h[4]-1);});p.appendChild(a);});
+    return p;}
+  var book=document.getElementById('book'),wrap=document.getElementById('wrap'),sizer=document.getElementById('sizer');
+  var L=document.getElementById('slotL'),R=document.getElementById('slotR');
+  var prevB=document.getElementById('prev'),nextB=document.getElementById('next'),count=document.getElementById('count');
+  var single=false,cur=0,busy=false,zoom=1;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  for(var k=0;k<N;k++){var pre=new Image();pre.src='cll/p'+(k+1)+'.jpg';}
+  function spreads(){var out=[];if(single){for(var i=0;i<N;i++)out.push([-1,i]);return out;}out.push([-1,0]);for(var k=1;k<N-1;k+=2)out.push([k,k+1<N?k+1:-1]);if(N%2===0)out.push([N-1,-1]);return out;}
+  var S=spreads();
+  function fill(slot,i){slot.innerHTML='';var c=make(i);if(c)slot.appendChild(c);}
+  function label(){var s=S[cur],a=s.filter(function(i){return i>=0}).map(function(i){return i+1});count.textContent=(a.length>1?'Pages '+a[0]+' and '+a[1]:'Page '+a[0])+' of '+N;prevB.disabled=cur===0;nextB.disabled=cur===S.length-1;
+    var sh=document.getElementById('shadow');if(single){sh.style.left='0';sh.style.width='600px';}else{sh.style.left=(s[0]<0?600:0)+'px';sh.style.width=(s[0]<0||s[1]<0?600:1200)+'px';}}
+  function render(){var s=S[cur];fill(L,s[0]);fill(R,s[1]);if(single&&R.firstChild)R.firstChild.classList.add('fade');label();}
+  function fit(){var was=single;single=window.innerWidth<820;book.classList.toggle('single',single);
+    if(was!==single){var pg=S[cur].filter(function(i){return i>=0})[0];S=spreads();cur=0;for(var k=0;k<S.length;k++){if(S[k].indexOf(pg)>=0){cur=k;break;}}render();}
+    var bw=single?600:1200,ww=wrap.clientWidth-32,wh=wrap.clientHeight-32,sc=Math.min(ww/bw,wh/800)*zoom;book.style.transform='scale('+sc+')';sizer.style.width=(bw*sc)+'px';sizer.style.height=(800*sc)+'px';
+    document.getElementById('zpct').textContent=Math.round(zoom*100)+'%';document.getElementById('zout').disabled=zoom<=1;document.getElementById('zin').disabled=zoom>=3;}
+  function setZoom(z,cx,cy){var old=zoom;zoom=Math.max(1,Math.min(3,Math.round(z*4)/4));if(zoom===old)return;var ox=cx!=null?cx:wrap.clientWidth/2,oy=cy!=null?cy:wrap.clientHeight/2;var fx=(wrap.scrollLeft+ox)/Math.max(1,wrap.scrollWidth),fy=(wrap.scrollTop+oy)/Math.max(1,wrap.scrollHeight);fit();wrap.scrollLeft=fx*wrap.scrollWidth-ox;wrap.scrollTop=fy*wrap.scrollHeight-oy;}
+  function go(to){if(busy||to<0||to>=S.length||to===cur)return;
+    if(single||reduce||Math.abs(to-cur)>1){cur=to;render();return;}
+    busy=true;var fwd=to>cur,a=S[cur],b=S[to];var leaf=document.createElement('div');leaf.className='leaf';
+    var f=document.createElement('div');f.className='face';var bk=document.createElement('div');bk.className='face back';
+    if(fwd){leaf.style.left='600px';leaf.style.transformOrigin='left center';var c1=make(a[1]),c2=make(b[0]);if(c1)f.appendChild(c1);if(c2)bk.appendChild(c2);fill(R,b[1]);}
+    else{leaf.style.left='0';leaf.style.transformOrigin='right center';var d1=make(a[0]),d2=make(b[1]);if(d1)f.appendChild(d1);if(d2)bk.appendChild(d2);fill(L,b[0]);}
+    leaf.appendChild(f);leaf.appendChild(bk);book.appendChild(leaf);
+    var sh=document.getElementById('shadow');sh.style.left='0';sh.style.width='1200px';
+    requestAnimationFrame(function(){requestAnimationFrame(function(){leaf.style.transform='rotateY('+(fwd?-180:180)+'deg)';});});
+    var done=false;function end(){if(done)return;done=true;leaf.remove();cur=to;render();busy=false;}
+    leaf.addEventListener('transitionend',end);setTimeout(end,1000);}
+  function toPage(pg){for(var k=0;k<S.length;k++){if(S[k].indexOf(pg)>=0){go(k);return;}}}
+  prevB.addEventListener('click',function(){go(cur-1)});nextB.addEventListener('click',function(){go(cur+1)});
+  document.getElementById('zin').addEventListener('click',function(){setZoom(zoom+.5)});
+  document.getElementById('zout').addEventListener('click',function(){setZoom(zoom-.5)});
+  book.addEventListener('dblclick',function(e){var r=wrap.getBoundingClientRect();setZoom(zoom>1?1:2,e.clientX-r.left,e.clientY-r.top);});
+  document.addEventListener('keydown',function(e){if(e.key==='+'||e.key==='='){setZoom(zoom+.5);return;}if(e.key==='-'||e.key==='_'){setZoom(zoom-.5);return;}if(e.key==='0'){setZoom(1);return;}if(zoom>1)return;if(e.key==='ArrowRight'||e.key==='PageDown'){go(cur+1);e.preventDefault();}if(e.key==='ArrowLeft'||e.key==='PageUp'){go(cur-1);e.preventDefault();}});
+  var tx=null;wrap.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});wrap.addEventListener('touchend',function(e){if(tx===null)return;var dx=e.changedTouches[0].clientX-tx;if(zoom===1&&Math.abs(dx)>40)go(cur+(dx<0?1:-1));tx=null;});
+  book.addEventListener('click',function(e){if(single||zoom>1||e.target.closest('.hot'))return;var r=book.getBoundingClientRect();var x=(e.clientX-r.left)/r.width;if(x>.85)go(cur+1);else if(x<.15)go(cur-1);});
+  window.addEventListener('resize',fit);
+  single=null;fit();render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mark A. Humes for Chairman: The Complete Plan</title>
+<meta name="description" content="Five platforms. One plan for the Free National Movement, ready from day one.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Layout idea: a campaign "front door". Navy field, one red diagonal, giant step numerals; five portals in a 2, 2, 1 build that reads as a story: organize, equip, envision, invest, lead. */
+  --navy:#0b1d3a;
+  --navy-2:#132b54;
+  --red:#d22b3c;
+  --red-2:#ff5a68;
+  --paper:#f5f6f9;
+  --ink:#0d1a30;
+  --mute:#6a7488;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Source Sans 3","Segoe UI",Helvetica,Arial,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--navy)}
+body{background:transparent;color:#eef2f8;font-family:var(--body);font-size:16px;line-height:1.5;min-height:100vh;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid #ffb4bd;outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.95;text-wrap:balance;letter-spacing:.005em}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:var(--red-2)}
+
+/* background field */
+.field{position:fixed;inset:0;z-index:-1;overflow:hidden;background:radial-gradient(1200px 700px at 85% -10%,#1d3c72 0%,rgba(29,60,114,0) 60%),linear-gradient(180deg,#0b1d3a,#08152b)}
+.field::before{content:"";position:absolute;right:-18vw;top:-30vh;width:60vw;height:160vh;background:var(--red);transform:rotate(18deg);opacity:.92;box-shadow:-40px 0 0 rgba(255,255,255,.06)}
+.field::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(180deg,#000 0%,transparent 70%)}
+
+/* top bar */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:22px 0}
+.mark{display:flex;align-items:center;gap:12px}
+.torch{width:40px;height:40px;border-radius:10px;background:#fff;display:grid;place-items:center;flex:none}
+.mark b{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:.06em;text-transform:uppercase;line-height:1}
+.mark small{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#a9b6cc;margin-top:3px}
+.top .tag{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:.14em;text-transform:uppercase;background:#fff;color:var(--navy);padding:6px 12px;border-radius:4px;white-space:nowrap}
+
+/* gate */
+.gate{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding:28px 0 64px}
+.hero h1{font-size:clamp(56px,8.4vw,112px);text-transform:uppercase;margin:14px 0 18px}
+.hero h1 em{font-style:italic;color:var(--red-2)}
+.hero .lede{font-size:20px;line-height:1.45;color:#d6deeb;max-width:34ch}
+.steps{list-style:none;display:grid;gap:0;margin-top:30px;max-width:520px;border-top:1px solid rgba(255,255,255,.14)}
+.steps li{display:grid;grid-template-columns:52px 96px 1fr;align-items:baseline;gap:8px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+.steps .n{font-family:var(--display);font-weight:800;font-size:22px;color:var(--red-2);font-variant-numeric:tabular-nums}
+.steps .v{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:#a9b6cc}
+.steps .t{font-weight:600}
+.card-form{background:#fff;color:var(--ink);border-radius:14px;padding:32px 30px;box-shadow:0 40px 80px rgba(0,0,0,.35);position:relative}
+.card-form::before{content:"";position:absolute;left:0;top:0;right:0;height:6px;background:var(--red);border-radius:14px 14px 0 0}
+.card-form h2{font-size:38px;color:var(--navy);text-transform:uppercase;margin-bottom:6px}
+.card-form p.sub{color:var(--mute);margin-bottom:20px}
+.f{display:grid;gap:6px;margin-bottom:14px}
+.f label{font-weight:700;font-size:14px}
+.f input{font:inherit;font-size:17px;padding:12px 14px;border:1.5px solid #cfd5e0;border-radius:8px;background:#fbfcfe;color:var(--ink);width:100%}
+.f input:focus{border-color:var(--navy);outline:none;box-shadow:0 0 0 3px rgba(19,43,84,.15)}
+#code{text-transform:uppercase;letter-spacing:.12em;font-weight:700}
+.go{width:100%;font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:.1em;text-transform:uppercase;background:var(--red);color:#fff;border:0;border-radius:8px;padding:14px;cursor:pointer;margin-top:4px}
+.go:hover{background:#b9202f}
+.go[disabled]{opacity:.6;cursor:wait}
+.consent{font-size:13.5px;color:var(--mute);margin-top:14px;line-height:1.45}
+.err{color:#b3192a;font-weight:600;font-size:14.5px;min-height:1.4em;margin-top:8px}
+
+/* hub */
+.hub{padding:8px 0 72px}
+.hubhead{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin:18px 0 30px}
+.hubhead h1{font-size:clamp(46px,6.2vw,84px);text-transform:uppercase}
+.hubhead h1 em{font-style:italic;color:var(--red-2)}
+.hubhead p{color:#d6deeb;font-size:18px;max-width:40ch}
+.welcome{font-size:15px;color:#a9b6cc;margin-bottom:6px}
+.path{display:flex;flex-wrap:wrap;gap:6px 0;margin-bottom:26px;font-family:var(--display);font-weight:700;font-size:16px;letter-spacing:.14em;text-transform:uppercase}
+.path span{color:#a9b6cc}
+.path span b{color:#fff}
+.path i{color:var(--red-2);font-style:normal;margin:0 10px}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:22px}
+.portal.third{grid-column:span 2;min-height:460px}
+.portal.half{grid-column:span 3}
+.portal.third h3{font-size:34px}
+.portal.third p{font-size:15.5px}
+.portal.third .num{font-size:88px}
+.chap{grid-column:1 / -1;display:flex;align-items:center;gap:14px;font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:.18em;text-transform:uppercase;color:#a9b6cc;margin-top:6px}
+.chap::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.16)}
+.chap b{color:var(--red-2)}
+.portal{position:relative;display:block;text-decoration:none;border-radius:14px;overflow:hidden;background:var(--navy-2);min-height:420px;isolation:isolate;box-shadow:0 24px 50px rgba(0,0,0,.35);transition:transform .25s ease,box-shadow .25s ease}
+.portal img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .6s ease}
+.portal::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(8,21,43,.05) 30%,rgba(8,21,43,.82) 66%,rgba(8,21,43,.96))}
+.portal:hover{transform:translateY(-4px);box-shadow:0 34px 60px rgba(0,0,0,.45)}
+.portal:hover img{transform:scale(1.04)}
+.portal .num{position:absolute;top:14px;right:20px;font-family:var(--display);font-weight:800;font-size:110px;line-height:1;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.85)}
+.portal .verb{position:absolute;top:22px;left:22px;font-family:var(--display);font-weight:800;font-size:16px;letter-spacing:.16em;text-transform:uppercase;background:var(--red);color:#fff;padding:5px 12px;border-radius:4px}
+.portal .body{position:absolute;left:24px;right:24px;bottom:22px}
+.portal h3{font-size:40px;text-transform:uppercase;margin-bottom:8px;color:#fff}
+.portal p{color:#dbe2ee;font-size:16.5px;max-width:46ch}
+.portal .open{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-family:var(--display);font-weight:800;font-size:17px;letter-spacing:.12em;text-transform:uppercase;color:#fff;border-bottom:2px solid var(--red-2);padding-bottom:2px}
+.portal.wide{grid-column:1 / -1;min-height:460px}
+.portal.wide::after{background:linear-gradient(90deg,rgba(8,21,43,.96) 0%,rgba(8,21,43,.86) 38%,rgba(8,21,43,.1) 72%)}
+.portal.wide .body{top:50%;bottom:auto;transform:translateY(-50%);max-width:520px}
+.portal.wide h3{font-size:58px}
+.portal.wide .verb{background:#fff;color:var(--red)}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:#93a1b8;font-size:13.5px;border-top:1px solid rgba(255,255,255,.12);padding:22px 0 30px}
+.foot button{background:none;border:0;color:#c7d1e0;text-decoration:underline;cursor:pointer;font:inherit}
+[hidden]{display:none!important}
+@media (max-width:900px){
+  .gate{grid-template-columns:1fr;gap:32px;padding-top:8px}
+  .grid{grid-template-columns:1fr}
+  .portal.third,.portal.half{grid-column:auto;min-height:380px}
+  .portal{min-height:380px}
+  .portal.wide{min-height:420px}
+  .portal.wide::after{background:linear-gradient(180deg,rgba(8,21,43,.05) 30%,rgba(8,21,43,.85) 66%,rgba(8,21,43,.96))}
+  .portal.wide .body{top:auto;bottom:22px;transform:none}
+  .portal.wide h3{font-size:44px}
+  .field::before{right:-60vw;width:90vw;opacity:.85}
+  .top .tag{display:none}
+}
+@media (prefers-reduced-motion:reduce){.portal,.portal img{transition:none}}
+</style>
+</head>
+<body>
+<div class="field" aria-hidden="true"></div>
+<div class="wrap">
+  <header class="top">
+    <div class="mark">
+      <div class="torch" aria-hidden="true"><svg width="22" height="28" viewBox="0 0 22 28"><path d="M11 1c3 4 6 6 6 10a6 6 0 0 1-12 0c0-2 1-3 2-4 0 2 1 3 2 3-1-3 0-6 2-9z" fill="#d22b3c"/><path d="M6 17h10l-3 10H9z" fill="#0b1d3a"/></svg></div>
+      <div><b>Mark A. Humes</b><small>Candidate for Chairman, FNM</small></div>
+    </div>
+    <div class="tag">Members First</div>
+  </header>
+
+  <!-- GATE -->
+  <main id="gate" class="gate">
+    <section class="hero">
+      <div class="eyebrow">The complete plan</div>
+      <h1>One plan. Ready from <em>day one.</em></h1>
+      <p class="lede">Six platforms that show how the Free National Movement will be organized, equipped, developed and led, and the Bahamas it will build.</p>
+      <ol class="steps" aria-label="What you will see">
+        <li><span class="n">01</span><span class="v">Organize</span><span class="t">The Organizing Blueprint</span></li>
+        <li><span class="n">02</span><span class="v">Equip</span><span class="t">Association HQ</span></li>
+        <li><span class="n">03</span><span class="v">Develop</span><span class="t">Center for Leadership &amp; Learning</span></li>
+        <li><span class="n">04</span><span class="v">Envision</span><span class="t">Building the Next Bahamas</span></li>
+        <li><span class="n">05</span><span class="v">Invest</span><span class="t">The Road to 2031</span></li>
+        <li><span class="n">06</span><span class="v">Lead</span><span class="t">Mark A. Humes for Chairman</span></li>
+      </ol>
+    </section>
+    <section class="card-form" aria-labelledby="formtitle">
+      <h2 id="formtitle">You're invited</h2>
+      <p class="sub">Enter the access code you were given, with your name and email, to open all six platforms.</p>
+      <form id="form" novalidate>
+        <div class="f"><label for="code">Access code</label><input id="code" name="code" autocomplete="off" autocapitalize="characters" spellcheck="false" required></div>
+        <div class="f"><label for="name">Full name</label><input id="name" name="name" autocomplete="name" required></div>
+        <div class="f"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" required></div>
+        <button class="go" id="go" type="submit">Open the plan</button>
+        <div class="err" id="err" role="alert"></div>
+      </form>
+      <p class="consent">Your name and email are used only to keep you updated on the campaign. They are never shared, and you can ask to be removed at any time.</p>
+    </section>
+  </main>
+
+  <!-- HUB -->
+  <main id="hub" class="hub" hidden>
+    <div class="hubhead">
+      <div>
+        <p class="welcome" id="welcome"></p>
+        <h1>The plan, <em>start to finish.</em></h1>
+      </div>
+      <p>Read them in order. Each platform opens in a new window, and this page stays here for you.</p>
+    </div>
+    <div class="path" aria-hidden="true"><span><b>01</b> Organize</span><i>&rarr;</i><span><b>02</b> Equip</span><i>&rarr;</i><span><b>03</b> Develop</span><i>&rarr;</i><span><b>04</b> Envision</span><i>&rarr;</i><span><b>05</b> Invest</span><i>&rarr;</i><span><b>06</b> Lead</span></div>
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <footer class="foot">
+    <span>Mark A. Humes for Chairman &middot; Free National Movement &middot; 2027 Convention</span>
+    <button id="signout" type="button" hidden>Not you? Sign out</button>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var KEY='mh-plan-hub-v2';
+  var gate=document.getElementById('gate'),hub=document.getElementById('hub'),grid=document.getElementById('grid');
+  var form=document.getElementById('form'),err=document.getElementById('err'),go=document.getElementById('go');
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){return null}}
+  function save(v){try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){}}
+  function show(data){
+    var first=(data.name||'').split(' ')[0];
+    document.getElementById('welcome').textContent=first?('Welcome, '+first+'.'):'Welcome.';
+    var CH={0:['Part one','Building the party'],3:['Part two','The country and the plan'],5:['Part three','The leader']};
+    grid.innerHTML=data.portals.map(function(p,i){
+      var size=p.size||'half',wide=size==='wide';
+      var safe=/^(https:\/\/|\/[a-z])/.test(p.url)?p.url:'#';
+      var chap=CH[i]?'<div class="chap"><b>'+CH[i][0]+'</b> '+CH[i][1]+'</div>':'';
+      return chap+'<a class="portal '+size+'" href="'+esc(safe)+'" target="_blank" rel="noopener">'+
+        '<img src="'+esc(p.img)+'" alt="" loading="'+(i<2?'eager':'lazy')+'">'+
+        '<span class="verb">'+esc(p.verb)+'</span><span class="num" aria-hidden="true">'+esc(p.n)+'</span>'+
+        '<span class="body"><h3>'+esc(p.title)+'</h3><p>'+esc(p.text)+'</p><span class="open">Open platform <span aria-hidden="true">&rarr;</span></span></span></a>';
+    }).join('');
+    gate.hidden=true;hub.hidden=false;document.getElementById('signout').hidden=false;window.scrollTo(0,0);
+  }
+  var saved=load();if(saved&&saved.portals)show(saved);
+  form.addEventListener('submit',function(e){
+    e.preventDefault();err.textContent='';
+    var body={code:form.code.value,name:form.name.value,email:form.email.value};
+    if(!body.code.trim()){err.textContent='Please enter your access code.';return;}
+    if(body.name.trim().length<2){err.textContent='Please enter your full name.';return;}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(body.email.trim())){err.textContent='Please enter a valid email address.';return;}
+    go.disabled=true;go.textContent='Opening...';
+    fetch('/api/enter',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+      .then(function(r){return r.json().catch(function(){return {ok:false,error:'Something went wrong. Please try again.'}})})
+      .then(function(d){if(d&&d.ok){save({name:d.name,portals:d.portals});show(d);}else{err.textContent=(d&&d.error)||'Something went wrong. Please try again.';}})
+      .catch(function(){err.textContent='No connection. Please check your internet and try again.';})
+      .then(function(){go.disabled=false;go.textContent='Open the plan';});
+  });
+  document.getElementById('signout').addEventListener('click',function(){try{localStorage.removeItem(KEY)}catch(e){}location.reload();});
+})();
+</script>
+</body>
+</html>

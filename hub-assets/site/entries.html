@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Plan Hub Sign-ins</title>
+<style>
+:root{--navy:#0b1d3a;--red:#d22b3c;--ink:#0d1a30;--mute:#6a7488;--line:#dde2ea}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",Helvetica,Arial,sans-serif;background:#f5f6f9;color:var(--ink)}
+header{background:var(--navy);color:#fff;padding:18px 24px;border-bottom:4px solid var(--red)}
+header h1{margin:0;font-size:22px}
+main{max-width:1000px;margin:0 auto;padding:24px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+input{font:inherit;padding:10px 12px;border:1.5px solid #cfd5e0;border-radius:8px;min-width:260px}
+button{font:inherit;font-weight:700;padding:10px 16px;border:0;border-radius:8px;background:var(--navy);color:#fff;cursor:pointer}
+button.alt{background:#fff;color:var(--navy);border:1.5px solid var(--navy)}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:10px;overflow:hidden}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);font-size:14.5px}
+th{background:#eef1f6;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
+.msg{color:var(--mute);margin:8px 0}
+</style>
+</head>
+<body>
+<header><h1>Plan Hub: who has signed in</h1></header>
+<main>
+  <div class="row">
+    <label for="key" class="msg">Admin key</label>
+    <input id="key" type="password" autocomplete="off">
+    <button id="load" type="button">Show sign-ins</button>
+    <button id="copy" class="alt" type="button" hidden>Copy as spreadsheet</button>
+  </div>
+  <p class="msg" id="msg"></p>
+  <table id="t" hidden><thead><tr><th>Date and time</th><th>Name</th><th>Email</th><th>Code</th></tr></thead><tbody></tbody></table>
+</main>
+<script>
+var rows=[];
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function when(iso){try{return new Date(iso).toLocaleString('en-US',{dateStyle:'medium',timeStyle:'short',timeZone:'America/Nassau'})}catch(e){return iso}}
+document.getElementById('load').onclick=function(){
+  var m=document.getElementById('msg');m.textContent='Loading...';
+  fetch('/api/entries',{headers:{'x-admin-key':document.getElementById('key').value}}).then(function(r){return r.json()}).then(function(d){
+    if(!d.ok){m.textContent=d.error||'Could not load.';return;}
+    rows=d.entries;m.textContent=d.count+' sign-in'+(d.count===1?'':'s')+', newest first (Nassau time).';
+    var t=document.getElementById('t');t.hidden=false;document.getElementById('copy').hidden=!rows.length;
+    t.querySelector('tbody').innerHTML=rows.map(function(e){return '<tr><td>'+esc(when(e.at))+'</td><td>'+esc(e.name)+'</td><td>'+esc(e.email)+'</td><td>'+esc(e.code)+'</td></tr>'}).join('');
+  }).catch(function(){m.textContent='No connection.';});
+};
+document.getElementById('copy').onclick=function(){
+  var tsv='Date and time\tName\tEmail\tCode\n'+rows.map(function(e){return [when(e.at),e.name,e.email,e.code].join('\t')}).join('\n');
+  navigator.clipboard.writeText(tsv).then(function(){document.getElementById('msg').textContent='Copied. Paste into Excel or Google Sheets.';},function(){document.getElementById('msg').textContent='Copy was blocked by the browser.';});
+};
+</script>
+</body>
+</html>
