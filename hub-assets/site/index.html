@@ -108,6 +108,8 @@ h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.95;text-wrap:ba
 .portal.wide h3{font-size:58px}
 .portal.wide .verb{background:#fff;color:var(--red)}
 .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:#93a1b8;font-size:13.5px;border-top:1px solid rgba(255,255,255,.12);padding:22px 0 30px}
+.out{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:.14em;text-transform:uppercase;background:#fff;color:var(--navy);border:0;border-radius:999px;padding:8px 18px;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.out:hover{background:#ffe3e6}
 .foot button{background:none;border:0;color:#c7d1e0;text-decoration:underline;cursor:pointer;font:inherit}
 [hidden]{display:none!important}
 @media (max-width:900px){
@@ -133,6 +135,7 @@ h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.95;text-wrap:ba
       <div class="torch" aria-hidden="true"><svg width="22" height="28" viewBox="0 0 22 28"><path d="M11 1c3 4 6 6 6 10a6 6 0 0 1-12 0c0-2 1-3 2-4 0 2 1 3 2 3-1-3 0-6 2-9z" fill="#d22b3c"/><path d="M6 17h10l-3 10H9z" fill="#0b1d3a"/></svg></div>
       <div><b>The HUB</b><small>One plan for the Free National Movement</small></div>
     </div>
+    <button class="out" id="signoutTop" type="button" hidden>Sign out</button>
   </header>
 
   <!-- GATE -->
@@ -179,7 +182,7 @@ h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.95;text-wrap:ba
 
   <footer class="foot">
     <span>The HUB &middot; Free National Movement &middot; 2027 Convention</span>
-    <button id="signout" type="button" hidden>Not you? Sign out</button>
+    <button id="signout" type="button" hidden>Sign out</button>
   </footer>
 </div>
 
@@ -206,7 +209,7 @@ h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.95;text-wrap:ba
         '<span class="verb">'+esc(p.verb)+'</span><span class="num" aria-hidden="true">'+esc(p.n)+'</span>'+
         '<span class="body"><h3>'+esc(p.title)+'</h3><p>'+esc(p.text)+'</p><span class="open">Open platform <span aria-hidden="true">&rarr;</span></span></span></a>';
     }).join('');
-    gate.hidden=true;hub.hidden=false;document.getElementById('signout').hidden=false;window.scrollTo(0,0);
+    gate.hidden=true;hub.hidden=false;document.getElementById('signout').hidden=false;document.getElementById('signoutTop').hidden=false;window.scrollTo(0,0);
   }
   var saved=load();if(saved&&saved.portals)show(saved);
   form.addEventListener('submit',function(e){
@@ -222,7 +225,8 @@ h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.95;text-wrap:ba
       .catch(function(){err.textContent='No connection. Please check your internet and try again.';})
       .then(function(){go.disabled=false;go.textContent='Open the plan';});
   });
-  document.getElementById('signout').addEventListener('click',function(){try{sessionStorage.removeItem(KEY)}catch(e){}location.reload();});
+  function signOut(){try{sessionStorage.removeItem(KEY)}catch(e){}location.reload();}
+  document.getElementById('signout').addEventListener('click',signOut);document.getElementById('signoutTop').addEventListener('click',signOut);
 })();
 </script>
 </body>
